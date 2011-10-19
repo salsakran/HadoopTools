@@ -26,10 +26,10 @@ public abstract class RollupWrapper extends MapReduceBase implements Mapper<Long
 	protected String job_name = "RollupWrapper";
 	// locations
 	protected String date_seperator = "_";
-	protected String input_base_location  = "/inputs/CHANGE_ME";
-	protected String rollup_location = "/rollups/CHANGE_ME";
-	protected String output_location = "/outputs/CHANGE_ME";
-	protected String postprocessed_output_location = "/processed_outputs/CHANGE_ME";
+	protected String input_base_location  = "/inputs/CHANGE_ME/";
+	protected String rollup_location = "/rollups/CHANGE_ME/";
+	protected String output_location = "/outputs/CHANGE_ME/";
+	protected String postprocessed_output_location = "/processed_outputs/CHANGE_ME/";
 	protected boolean output_text = true;
 	protected boolean postprocess_output = true;
 	
@@ -70,6 +70,16 @@ public abstract class RollupWrapper extends MapReduceBase implements Mapper<Long
 				RollupWrapperCLI.printHelp(job_name);
 				System.exit(1);
 			}
+			
+			
+			if(cl.hasOption('o'))
+			{
+				postprocessed_output_location += (String)cl.getOptionValue('o') + "/";
+			}
+			// tag on the date for all the int files
+			output_location += end_date;
+			postprocessed_output_location += end_date;
+			
 			createMapAndAggregateWrapper();
 			wr.run();
 			postProcess();

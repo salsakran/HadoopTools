@@ -17,7 +17,7 @@ public class RollupWrapperCLI
 		options.addOption("m", "num_months", true, "the number of months before the end date to process");
 		options.addOption("n", "num_days", true, "the number of days before the end date to process");
 		options.addOption("s", "start_date", true, "first day to include in this rollup");
-
+		options.addOption("o", "output_prefix", true, "output prefix");
 	}
 	
 		
